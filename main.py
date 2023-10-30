@@ -30,15 +30,15 @@ st.markdown(
 )
 
 # Assuming your custom icon is saved as "custom_icon.png"
-custom_icon_path = "assets/ML_water_assistant_01.jpeg"
+custom_icon_path = "assets/aquachat_assistant_icon01.2.jpg"
 
 def assistant_message(content):
-    col1, col2 = st.columns([0.074, 1])  # Adjust the width ratio between icon and text as needed
-    col1.image(custom_icon_path, width=50)
+    col1, col2 = st.columns([0.075, 1])  # Adjust the width ratio between icon and text as needed
+    col1.image(custom_icon_path, width=25)
     col2.write(content)
 
 # Inside your code where you display assistant's messages
-st.image(custom_icon_path, use_column_width=True)
+# st.image(custom_icon_path, use_column_width=True)
 
 with st.sidebar:
     user_icon = st.text_input("Custom User Icon", "👤")  # Set default value here
