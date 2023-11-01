@@ -1,9 +1,9 @@
 import openai
 import streamlit as st
-from flask_cors import CORS
+# from flask_cors import CORS
 
 # Enable CORS for all routes
-CORS(st)
+# CORS(st)
 
 def response_msg(openai_api_key: str, prompt: str):
     st.session_state.messages.append({"role": user_icon, "content": prompt})
