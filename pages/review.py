@@ -34,9 +34,9 @@ def save_files():
     os.mkdir(review_dir) 
 
     with open(os.path.join(review_dir, 'review-' + date_time + '.txt'), 'w') as f:
-        if(len(st.session_state.fullname) > 0):
-            f.write('Fullname:\n')
-            f.write(st.session_state.fullname)
+        #if(len(st.session_state.fullname) > 0):
+        #    f.write('Fullname:\n')
+        #    f.write(st.session_state.fullname)
         if(len(st.session_state.contact) > 0):
             f.write('\n\nContact:\n')
             f.write(st.session_state.contact)
