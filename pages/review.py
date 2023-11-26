@@ -11,7 +11,7 @@ st.title("Submit a review")
 st.caption("We're collecting reviews on water technologies. Feel free to share here!.")
 
 base_dir = Path(__file__).parent.parent 
-reviews_dir = os.path.join(base_dir, 'volume\\reviews')
+reviews_dir = os.path.join(base_dir, 'volume/reviews')
     
 def save_files():
     files = st.session_state.file_upload_widget
@@ -30,7 +30,7 @@ def save_files():
     date_time = datetime.now().strftime("%Y%m%d_%H_%M_%S")
 
     # creates a new review directory
-    review_dir = reviews_dir + '\\' + date_time
+    review_dir = reviews_dir + '/' + date_time
     os.mkdir(review_dir) 
 
     with open(os.path.join(review_dir, 'review-' + date_time + '.txt'), 'w') as f:
