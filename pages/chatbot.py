@@ -20,18 +20,6 @@ def response_msg(openai_api_key: str, prompt: str):
         result = {"role": "assistant", "content": openai_msg.content}  # Change bot icon
     return result
 
-# Custom CSS for centering the title
-st.markdown(
-    """
-    <style>
-    .css-1lqj2e3 {
-        display: flex;
-        justify-content: center;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True,
-)
 
 # Assuming your custom icon is saved as "custom_icon.png"
 custom_icon_path = "assets/aquachat_assistant_icon01.2.jpg"
