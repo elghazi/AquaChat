@@ -46,9 +46,11 @@ def save_files():
 
     if len(files) > 0:
         for file in files:
-            with open(os.path.join(review_dir, file.name), 'wb') as f:
-                f.write(file.getbuffer())
-                
+            file_path = os.path.join(review_dir, file.name)
+            with open(file_path, 'wb') as f:
+                # f.write(file.getbuffer())
+                f.write(file.getvalues())
+
     st.success('Review successfully sumbitted!', icon="✅")
     st.toast('Thank you for submitting the review!')
     return True
