@@ -1,7 +1,5 @@
 import streamlit as st
-import pandas as pd
 import os
-from io import StringIO
 from pathlib import Path
 from datetime import datetime
 
@@ -11,18 +9,12 @@ st.title("Submit a review")
 st.caption("We're collecting reviews on water technologies. Feel free to share here!.")
 
 base_dir = Path(__file__).parent.parent
-reviews_dir = os.path.join(base_dir, 'volume/reviews')
+reviews_dir = base_dir / "volume" / "reviews"
+reviews_dir.resolve().mkdir(parents=True, exist_ok=True)
 
 
 def save_files():
     files = st.session_state.file_upload_widget
-
-    # if(len(st.session_state.fullname) == 0):
-    #    st.error('Field Fullname is required', icon="🚨")
-    #    return False
-    # if(len(st.session_state.review) == 0):
-    #    st.error('Please enter a Review to submit', icon="🚨")
-    #    return False
 
     if (len(st.session_state.review) == 0 and len(files) == 0):
         st.error('Please enter a review or upload a review document to submit', icon="🚨")
@@ -31,16 +23,19 @@ def save_files():
     date_time = datetime.now().strftime("%Y%m%d_%H_%M_%S")
 
     # creates a new review directory
-    review_dir = reviews_dir + '/' + date_time
-    os.mkdir(review_dir)
-
-    with open(os.path.join(review_dir, 'review-' + date_time + '.txt'), 'w') as f:
-        # if(len(st.session_state.fullname) > 0):
-        #    f.write('Fullname:\n')
-        #    f.write(st.session_state.fullname)
-        if (len(st.session_state.contact) > 0):
-            f.write('\n\nContact:\n')
-            f.write(st.session_state.contact)
+    review_dir = reviews_dir / date_time
+    review_dir.resolve().mkdir(parents=True, exist_ok=True)
+    review_file_path = review_dir / f"review-{date_time}.txt"
+    with open(review_file_path, 'w') as f:
+        if (len(st.session_state.fullname) > 0):
+            f.write('\n\nFullname:\n')
+            f.write(st.session_state.fullname)
+        if (len(st.session_state.email) > 0):
+            f.write('\n\nEmail:\n')
+            f.write(st.session_state.email)
+        if (len(st.session_state.affiliation) > 0):
+            f.write('\n\nAffiliation:\n')
+            f.write(st.session_state.affiliation)
         if (len(st.session_state.review) > 0):
             f.write('\n\nReview:\n')
             f.write(st.session_state.review)
@@ -57,14 +52,15 @@ def save_files():
 
 def main():
     with st.form("upload_form", clear_on_submit=True):
-        # fullname = st.text_input('Fullname*', '', key = 'fullname')
         review = st.text_area("Review", key='review', height=300, placeholder="Please share you review here...")
-        uploaded_files = st.file_uploader('Upload review related documents (optional)',
-                                          type=['pdf', 'txt', 'doc', 'docx', 'tex'],
+        uploaded_files = st.file_uploader('Upload documents (optional)',
+                                          type=['pdf', 'txt', 'doc', 'docx'],
                                           key='file_upload_widget',
                                           accept_multiple_files=True)
 
-        contact = st.text_area('Contact', key='contact', placeholder="Add some optional contact information")
+        fullname = st.text_input('Full name',  key='fullname', placeholder="Add your name")
+        email = st.text_input('Email', key='email', placeholder="Add your email")
+        affiliation = st.text_input('Affiliation', key='affiliation', placeholder="Add your company")
         # If a files was uploaded, display its contents
         submitted = st.form_submit_button('Submit review', on_click=save_files)
 
