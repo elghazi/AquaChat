@@ -40,10 +40,10 @@ def save_files():
             f.write('\n\nReview:\n')
             f.write(st.session_state.review)
 
-    if len(files) > 0:
-        for file in files:
-            with open(os.path.join(review_dir, file.name), 'wb') as f:
-                f.write(file.getbuffer())
+    # if len(files) > 0:
+    for file in files:
+        with open(review_dir / file.name, 'wb') as f:
+            f.write(file.getbuffer())
 
     st.success('Review successfully sumbitted!', icon="✅")
     st.toast('Thank you for submitting the review!')
@@ -54,7 +54,7 @@ def main():
     with st.form("upload_form", clear_on_submit=True):
         review = st.text_area("Review", key='review', height=300, placeholder="Please share you review here...")
         uploaded_files = st.file_uploader('Upload documents (optional)',
-                                          type=['pdf', 'txt', 'doc', 'docx'],
+                                          type=['pdf', 'txt', 'doc', 'docx', 'xls', 'xlsx', 'html', 'cvs'],
                                           key='file_upload_widget',
                                           accept_multiple_files=True)
 
