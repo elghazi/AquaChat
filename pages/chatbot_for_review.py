@@ -17,7 +17,8 @@ user_icon = "👤"
 
 def upload_review():
     with st.form("upload_form", clear_on_submit=True):
-        review = st.text_area("Review", key='review', height=100, placeholder="Please share you review here...")
+        # review = st.text_area("Review", key='review', height=100, placeholder="Please share you review here...")
+        review = st.text_area("Problem", key='review', height=100, placeholder="Please describe you problem here...")
         uploaded_files = st.file_uploader('Upload documents (optional)',
                                           type=['pdf', 'txt', 'doc', 'docx', 'xls', 'xlsx', 'html', 'cvs'],
                                           key='file_upload_widget',
@@ -98,7 +99,8 @@ if st.session_state.chat_mode.value == MODE.CHAT.value:
             st.markdown(prompt)
         st.session_state.messages.append({"role": "user", "content": prompt})
 
-        response = "We're collecting reviews on water technologies. Feel free to share!"
+        # response = "We're collecting reviews on water technologies. Feel free to share!"
+        response = "We're collecting problem reviews on water technologies. Feel free to share!"
         with st.chat_message("assistant"):
             st.markdown(response)
         st.session_state.messages.append({"role": "assistant", "content": response})
