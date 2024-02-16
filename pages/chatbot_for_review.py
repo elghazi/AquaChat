@@ -18,7 +18,7 @@ user_icon = "👤"
 def upload_review():
     with st.form("upload_form", clear_on_submit=True):
         # review = st.text_area("Review", key='review', height=100, placeholder="Please share you review here...")
-        review = st.text_area("Problem", key='review', height=100, placeholder="Please describe you problem here...")
+        review = st.text_area("Problem", key='review', height=100, placeholder="Please review you problem here...")
         uploaded_files = st.file_uploader('Upload documents (optional)',
                                           type=['pdf', 'txt', 'doc', 'docx', 'xls', 'xlsx', 'html', 'cvs'],
                                           key='file_upload_widget',
@@ -35,7 +35,7 @@ def upload_review():
                 st.write(file.name)
 
         # Display a submit button
-        submitted = st.form_submit_button('Submit review')
+        submitted = st.form_submit_button('Submit')
         if submitted:
             # Process and save the review
             save_review(review, fullname, email, affiliation, uploaded_files)
@@ -45,7 +45,7 @@ def upload_review():
 def save_review(review, fullname, email, affiliation, files):
     # Check if both review content and files are empty
     if not review and not files:
-        st.error('Please enter a review or upload a review document to submit', icon="🚨")
+        st.error('Please enter a problem review or upload a problem review document to submit', icon="🚨")
         return False
 
     # Create a unique directory for each review
@@ -69,8 +69,8 @@ def save_review(review, fullname, email, affiliation, files):
                 f.write(file.getbuffer())
 
     # Display success messages or other actions
-    st.success('Thank you for your review!')
-    st.toast('Review successfully submitted!')
+    st.success('Thank you for your problem review!')
+    st.toast('Problem review successfully submitted!')
     return True
 
 def assistant_message(content):
